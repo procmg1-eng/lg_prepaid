@@ -452,7 +452,25 @@ a { color: inherit; }
 .plan-arrow:hover { border-color: var(--magenta); color: var(--magenta); }
 .plan-arrow:disabled { opacity: 0.3; cursor: default; pointer-events: none; }
 
-@media (max-width: 720px) { .plan-slide { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
+@media (max-width: 720px) {
+  #plan .plan-slide {
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 14px;
+    padding: 4px 24px 10px;
+    margin: 0 -24px;
+    scrollbar-width: none;
+  }
+  #plan .plan-slide::-webkit-scrollbar { display: none; }
+  #plan .plan-card {
+    flex: 0 0 82%;
+    scroll-snap-align: center;
+    max-width: none;
+  }
+}
 
 .plan-slide-single { display: flex; justify-content: center; }
 .plan-card-5g {
