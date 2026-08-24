@@ -267,10 +267,12 @@ a { color: inherit; }
 /* ---------- Usim cards ---------- */
 .usim-card-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .usim-card-grid.single { grid-template-columns: minmax(0, 260px); justify-content: center; }
-.usim-card-grid.pair { grid-template-columns: repeat(2, minmax(0, 260px)); justify-content: center; gap: 20px; }
+.usim-card-grid.pair { grid-template-columns: repeat(2, minmax(0, 320px)); justify-content: center; gap: 20px; }
 @media (max-width: 720px) {
   .usim-card-grid.single, .usim-card-grid.pair { grid-template-columns: minmax(0, 280px); }
 }
+.usim-card-grid.pair .usim-card-img { aspect-ratio: 1/1; }
+.usim-card-grid.pair .usim-card-img img { object-fit: cover; }
 .usim-card {
   background: var(--white);
   border: 1.5px solid var(--line);
@@ -426,6 +428,19 @@ a { color: inherit; }
 .plan-spec { font-size: 12px; color: var(--text-soft); margin: 0 0 14px; line-height: 1.55; min-height: 55px; }
 .plan-price-new { font-family: var(--font-display); font-weight: 900; font-size: 20px; color: var(--magenta); }
 .plan-price-new small { font-family: var(--font-body); font-weight: 500; font-size: 12.5px; }
+.plan-card-cta {
+  display: block;
+  text-align: center;
+  margin-top: 14px;
+  background: var(--yellow);
+  color: var(--yellow-ink);
+  font-weight: 800;
+  font-size: 12.5px;
+  padding: 9px 0;
+  border-radius: 999px;
+  text-decoration: none;
+}
+.plan-card-cta:hover { opacity: 0.9; }
 
 .plan-nav { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 22px; }
 .plan-arrow {
