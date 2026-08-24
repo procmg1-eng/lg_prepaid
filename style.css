@@ -442,42 +442,23 @@ a { color: inherit; }
 }
 .plan-card-cta:hover { opacity: 0.9; }
 
-.plan-nav { display: none; align-items: center; justify-content: center; gap: 12px; margin-top: 4px; }
-@media (max-width: 720px) {
-  .plan-nav { display: flex; }
-}
-.plan-arrow {
-  width: 38px; height: 38px; border-radius: 50%;
-  border: 1px solid var(--line); background: var(--white);
-  color: var(--text-soft); font-size: 15px; cursor: pointer;
-  transition: border-color 0.2s, color 0.2s;
-}
-.plan-arrow:hover { border-color: var(--magenta); color: var(--magenta); }
-.plan-arrow:disabled { opacity: 0.3; cursor: default; pointer-events: none; }
+/* ---------- 요금제 슬라이더 (hstelecom.kr 구조 이식) ---------- */
+.plans-slider-wrap { overflow: hidden; }
+.plans-track { display: flex; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
+.plans-slide { min-width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 4px 2px; }
 
-@media (max-width: 720px) {
-  #plan .plan-slide {
-    display: flex;
-    grid-template-columns: none;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 12px;
-    padding: 4px 24px 10px;
-    margin: 0 -24px;
-    scrollbar-width: none;
-  }
-  #plan .plan-slide::-webkit-scrollbar { display: none; }
-  #plan .plan-card {
-    flex: 0 0 46%;
-    scroll-snap-align: start;
-    max-width: none;
-    padding: 14px 12px;
-  }
-  #plan .plan-name { font-size: 13px; }
-  #plan .plan-spec { font-size: 10.5px; min-height: 32px; margin-bottom: 10px; }
-  #plan .plan-price-new { font-size: 17px; }
-  #plan .plan-card-cta { font-size: 11px; padding: 8px 0; }
+.plans-nav { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 22px; }
+.plans-arrow {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1.5px solid var(--line); background: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.2s; color: var(--text-soft); font-size: 16px;
+}
+.plans-arrow:hover { border-color: var(--magenta); color: var(--magenta); }
+.plans-arrow:disabled { opacity: 0.3; cursor: default; pointer-events: none; }
+
+@media (max-width: 768px) {
+  .plans-slide { grid-template-columns: 1fr; gap: 12px; }
 }
 
 .plan-slide-single { display: flex; justify-content: center; }
