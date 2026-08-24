@@ -322,49 +322,53 @@
     <div class="plan-slide" data-carrier="lg">
       <div class="plan-card">
         <p class="plan-name">LG 선불29</p>
-        <p class="plan-spec">데이터 300MB (1Mbps 무제한)<br>통화 무제한(부가 50분)<br>문자 무제한</p>
+        <p class="plan-spec">통화 무제한(부가 50분) · 문자 무제한<br>데이터 300MB + 1Mbps 무제한</p>
         <div class="plan-price-new">29,700<small>원</small></div>
         <a href="https://pf.kakao.com/_MrxjwX/chat" class="plan-card-cta">신청하기</a>
       </div>
       <div class="plan-card">
         <p class="plan-name">LG 선불36</p>
-        <p class="plan-spec">데이터 300MB (3Mbps 무제한)<br>통화 무제한(부가 50분)<br>문자 무제한</p>
+        <p class="plan-spec">통화 무제한(부가 50분) · 문자 무제한<br>데이터 300MB + 3Mbps 무제한</p>
         <div class="plan-price-new">36,300<small>원</small></div>
         <a href="https://pf.kakao.com/_MrxjwX/chat" class="plan-card-cta">신청하기</a>
       </div>
       <div class="plan-card">
         <p class="plan-name">LG 선불38</p>
-        <p class="plan-spec">데이터 10.3GB (3Mbps 무제한)<br>통화 무제한(부가 50분)<br>문자 무제한</p>
+        <p class="plan-spec">통화 무제한(부가 50분) · 문자 무제한<br>데이터 10.3GB + 3Mbps 무제한</p>
         <div class="plan-price-new">38,300<small>원</small></div>
         <a href="https://pf.kakao.com/_MrxjwX/chat" class="plan-card-cta">신청하기</a>
       </div>
       <div class="plan-card">
         <p class="plan-name">LG 선불39</p>
-        <p class="plan-spec">데이터 15GB (3Mbps 무제한)<br>통화 100분<br>문자 100건</p>
+        <p class="plan-spec">통화 100분 · 문자 100건<br>데이터 15GB + 3Mbps 무제한</p>
         <div class="plan-price-new">39,000<small>원</small></div>
         <a href="https://pf.kakao.com/_MrxjwX/chat" class="plan-card-cta">신청하기</a>
       </div>
       <div class="plan-card">
         <span class="plan-popular-badge">👍 인기</span>
         <p class="plan-name">LG 선불55</p>
-        <p class="plan-spec">데이터 11GB+매일 2GB (3Mbps 무제한)<br>통화 무제한(부가 300분)<br>문자 무제한</p>
+        <p class="plan-spec">통화 무제한(부가 300분) · 문자 무제한<br>데이터 11GB+매일 2GB, 3Mbps 무제한</p>
         <div class="plan-price-new">55,000<small>원</small></div>
         <a href="https://pf.kakao.com/_MrxjwX/chat" class="plan-card-cta">신청하기</a>
       </div>
       <div class="plan-card">
         <p class="plan-name">LG 선불66</p>
-        <p class="plan-spec">데이터 매일 5GB (5Mbps 무제한)<br>통화 무제한(부가 300분)<br>문자 무제한</p>
+        <p class="plan-spec">통화 무제한(부가 300분) · 문자 무제한<br>데이터 매일 5GB + 5Mbps 무제한</p>
         <div class="plan-price-new">66,000<small>원</small></div>
         <a href="https://pf.kakao.com/_MrxjwX/chat" class="plan-card-cta">신청하기</a>
       </div>
       <div class="plan-card plan-card-5g">
         <span class="plan-5g-badge">🟣 국내 유일 선불 5G</span>
         <p class="plan-name">LG 5G선불46</p>
-        <p class="plan-spec">데이터 20GB (3Mbps 무제한)<br>통화 무제한<br>문자 무제한</p>
+        <p class="plan-spec">통화 무제한 · 문자 무제한<br>데이터 20GB + 3Mbps 무제한</p>
         <div class="plan-price-new">46,200<small>원</small></div>
         <a href="https://pf.kakao.com/_MrxjwX/chat" class="plan-card-cta">신청하기</a>
         <p class="plan-5g-note">SK·KT는 아직 선불 5G가 없어요</p>
       </div>
+    </div>
+    <div class="plan-nav">
+      <button type="button" class="plan-arrow" id="planPrev" aria-label="이전 요금제">←</button>
+      <button type="button" class="plan-arrow" id="planNext" aria-label="다음 요금제">→</button>
     </div>
     <table class="plan-table" style="margin-top:24px;">
       <thead><tr><th>사용 패턴</th><th>추천 요금제</th><th>이유</th></tr></thead>
@@ -609,16 +613,18 @@
   var slide = document.querySelector('#plan .plan-slide');
   if (!slide) return;
   var autoTimer = null;
+  var prevBtn = document.getElementById('planPrev');
+  var nextBtn = document.getElementById('planNext');
 
   function cardStep() {
     var first = slide.children[0];
     if (!first) return 0;
     var style = getComputedStyle(slide);
-    var gap = parseFloat(style.columnGap || style.gap || '14');
+    var gap = parseFloat(style.columnGap || style.gap || '12');
     return first.getBoundingClientRect().width + gap;
   }
 
-  function next() {
+  function goNext() {
     var maxScroll = slide.scrollWidth - slide.clientWidth;
     if (slide.scrollLeft >= maxScroll - 4) {
       slide.scrollTo({ left: 0, behavior: 'smooth' });
@@ -627,9 +633,17 @@
     }
   }
 
+  function goPrev() {
+    if (slide.scrollLeft <= 4) {
+      slide.scrollTo({ left: slide.scrollWidth, behavior: 'smooth' });
+    } else {
+      slide.scrollBy({ left: -cardStep(), behavior: 'smooth' });
+    }
+  }
+
   function startAuto() {
     stopAuto();
-    autoTimer = setInterval(next, 3500);
+    autoTimer = setInterval(goNext, 3500);
   }
 
   function stopAuto() {
@@ -647,10 +661,12 @@
   syncWithViewport();
   window.addEventListener('resize', syncWithViewport);
 
-  // 사용자가 직접 스와이프/터치하면 자동재생 중단
+  // 사용자가 직접 조작하면(스와이프·화살표) 자동재생 중단
   ['touchstart', 'pointerdown', 'wheel'].forEach(function (evt) {
     slide.addEventListener(evt, stopAuto, { passive: true });
   });
+  if (nextBtn) nextBtn.addEventListener('click', function () { stopAuto(); goNext(); });
+  if (prevBtn) prevBtn.addEventListener('click', function () { stopAuto(); goPrev(); });
 })();
 </script>
 </body>
